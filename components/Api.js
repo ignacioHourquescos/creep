@@ -12,23 +12,24 @@ const Api = ()=>{
    useEffect(()=>{
       fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=1000&page=1&price_change_percentage=1h%2C24h%2C7d&sparkline=false")
       .then(response => response.json())
-      .then(data=>{setCoinArray(data);setLoading(false)})
-   })
+      .then(data=>{console.log(data);setCoinArray(data);setLoading(false)})
+   }, [])
 
 
    const columns = [
+      {
+         title: 'marketCap',
+         dataIndex: 'market_cap_rank',
+         defaultSortOrder: 'descend',
+     
+       },
       {
         title: 'Moneda',
         dataIndex: 'name',
       //   sorter: (a, b) => a.name.length - b.name.length,
       //   sortDirections: ['descend'],
       },
-      // {
-      //   title: 'Value',
-      //   dataIndex: 'value',
-      //   defaultSortOrder: 'descend',
-      //   sorter: (a, b) => a.value - b.value,
-      // },
+ 
       {
          title: 'Variacion ultima hora en %',
          dataIndex: 'price_change_percentage_1h_in_currency',
